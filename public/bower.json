@@ -1,0 +1,18 @@
+{
+  "name": "engbooster",
+  "homepage": "https://github.com/robinguo/engbooster",
+  "authors": [
+    "Robin Guo <robin.guo.ch@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

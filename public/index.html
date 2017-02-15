@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="engbooster">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/" />
+  <title>EngBooster</title>
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-heaer">
+        <a href="/" class="navbar-brand">EngBooster</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div ng-view></div>
+  </div>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="javascripts/app.js"></script>
+  <script src="javascripts/route.js"></script>
+  <script src="javascripts/directives/eb-variable.js"></script>
+  <script src="javascripts/directives/eb-sub.js"></script>
+  <script src="javascripts/directives/eb-reference.js"></script>
+  <script src="javascripts/directives/eb-tag.js"></script>
+  <script src="javascripts/services/templates.js"></script>
+  <script src="javascripts/controllers/templates-index-controller.js"></script>
+  <script src="javascripts/controllers/templates-edit-controller.js"></script>
+</body>
+
+</html>

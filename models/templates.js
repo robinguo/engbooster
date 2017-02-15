@@ -1,5 +1,5 @@
 var mongoose = require("mongoose"),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
   substitionSchema = new Schema({
     src: String,
     dst: String
@@ -16,7 +16,7 @@ var mongoose = require("mongoose"),
     difficulty: Number,
     grammarPoint: String,
     // vacabularies: [String],
-    reference: [{textbook: String, chapter: String}],
+    reference: [{ textbook: String, chapter: String }],
     tags: [String]
   }, {
     timestamps: true

@@ -1,0 +1,6 @@
+<fieldset class="form-inline">
+  <input type="text" class="input-mini" ng-model="ref.textbook" placeholder="教材">
+  <input type="text" class="input-mini" ng-model="ref.chapter" placeholder="章节／单元">
+  <button type="button" class="btn btn-sm btn-danger" ng-click="removeReference()" ng-hide="new">删除</button>
+  <button type="button" class="btn btn-sm btn-success" ng-click="addReference()" ng-show="new">添加</button>
+</fieldset>

@@ -76,7 +76,7 @@ angular.module("engbooster")
         $location.path("/");
       } else {
         Templates.create($scope.template)
-          .success(function() {
+          .then(function() {
             $scope.template = {};
           });
       }

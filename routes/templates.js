@@ -2,10 +2,11 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   error = require("../middlewares/error.js"),
   Template = require("../models/templates.js"),
+  Verify = require("./verify"),
   router = express.Router();
 
 router.route("/")
-  .get(function(req, res, next) {
+  .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     Template.find({}, function(err, templates) {
       if (err) {
         err.status = 500;
@@ -14,7 +15,7 @@ router.route("/")
       res.json(templates);
     });
   })
-  .post(function(req, res, next) {
+  .post(Verify.verifyOrdinaryUser, function(req, res, next) {
     Template.insertMany([req.body], function(error, templates) {
       if (templates.length) {
         res.json(templates);
@@ -27,10 +28,10 @@ router.route("/")
   });
 
 router.route("/:id")
-  .all(function(req, res, next) {
+  .all(Verify.verifyOrdinaryUser, function(req, res, next) {
     next();
   })
-  .get(function(req, res, next) {
+  .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     Template.findById(req.params.id, function(err, template) {
       if (template) {
         res.json(template);
@@ -41,7 +42,7 @@ router.route("/:id")
       }
     });
   })
-  .put(function(req, res, next) {
+  .put(Verify.verifyOrdinaryUser, function(req, res, next) {
     Template.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, {
@@ -56,7 +57,7 @@ router.route("/:id")
       }
     });
   })
-  .delete(function(req, res, next) {
+  .delete(Verify.verifyOrdinaryUser, function(req, res, next) {
     Template.findByIdAndRemove(req.params.id, function(err, template) {
       if (template) {
         res.json(template);

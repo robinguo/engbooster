@@ -26,11 +26,17 @@ process.on("SIGINT", function() {
   });
 });
 
+
 var checkDBConn = require("./middlewares/checkDBConn.js");
 var templates = require("./routes/templates.js");
+var users = require("./routes/users.js");
 var error =require("./middlewares/error.js")
 
 var app = express();
+
+var passport = require("passport");
+var LocalStrategy = require('passport-local').Strategy;
+var User = require("./models/users.js");
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -42,11 +48,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(passport.initialize());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', index);
 // app.use('/users', users);
 app.use(checkDBConn);
+app.use('/api/users', users);
 app.use("/api/templates", templates);
 app.use("/*", function(req, res, next) {
   res.sendFile("index.html", {root: path.join(__dirname, "public")});
@@ -60,6 +72,6 @@ app.use("/*", function(req, res, next) {
 // });
 
 // error handler
-// app.use(error);
+app.use(error);
 
 module.exports = app;

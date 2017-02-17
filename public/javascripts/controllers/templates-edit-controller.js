@@ -81,4 +81,9 @@ angular.module("engbooster")
           });
       }
     };
+
+
+    $scope.$watch("template.variables", function(newVal) {
+      
+    }, true);
   }]);

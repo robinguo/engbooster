@@ -4,6 +4,10 @@ angular.module("engbooster")
         templateUrl: "templates/pages/templates/index.html",
         controller: "TemplatesIndexController"
       })
+      .when("/login", {
+        templateUrl: "templates/pages/templates/login.html",
+        controller: "SessionController"
+      })
       .when("/templates", {
         templateUrl: "templates/pages/templates/index.html",
         controller: "TemplatesIndexController"

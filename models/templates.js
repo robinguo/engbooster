@@ -17,7 +17,9 @@ var mongoose = require("mongoose"),
     grammarPoint: String,
     // vacabularies: [String],
     reference: [{ textbook: String, chapter: String }],
-    tags: [String]
+    tags: [String],
+    createdBy: String,
+    updatedBy: String
   }, {
     timestamps: true
   }),

@@ -16,7 +16,10 @@ router.route("/")
     });
   })
   .post(Verify.verifyOrdinaryUser, function(req, res, next) {
-    Template.insertMany([req.body], function(error, templates) {
+    var template = req.body;
+    template.createdBy = req.decoded._doc.username;
+    template.updatedBy = req.decoded._doc.username;
+    Template.insertMany([template], function(error, templates) {
       if (templates.length) {
         res.json(templates);
       } else {
@@ -43,8 +46,10 @@ router.route("/:id")
     });
   })
   .put(Verify.verifyOrdinaryUser, function(req, res, next) {
+    var template = req.body;
+    template.updatedBy = req.decoded._doc.username;
     Template.findByIdAndUpdate(req.params.id, {
-      $set: req.body
+      $set: template
     }, {
       new: true
     }, function(err, template) {

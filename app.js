@@ -30,6 +30,7 @@ process.on("SIGINT", function() {
 var checkDBConn = require("./middlewares/checkDBConn.js");
 var templates = require("./routes/templates.js");
 var users = require("./routes/users.js");
+var stats = require("./routes/stats.js");
 var error =require("./middlewares/error.js")
 
 var app = express();
@@ -60,6 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(checkDBConn);
 app.use('/api/users', users);
 app.use("/api/templates", templates);
+app.use("/api/stats", stats);
 app.use("/*", function(req, res, next) {
   res.sendFile("index.html", {root: path.join(__dirname, "public")});
 });

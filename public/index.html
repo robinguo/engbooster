@@ -14,7 +14,19 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-heaer">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a href="/" class="navbar-brand">EngBooster</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/templates">例句<span class="sr-only">(current)</a></li>
+          <li><a href="/stats">统计</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -38,6 +50,7 @@
   <script src="javascripts/controllers/session-controller.js"></script>
   <script src="javascripts/controllers/templates-index-controller.js"></script>
   <script src="javascripts/controllers/templates-edit-controller.js"></script>
+  <script src="javascripts/controllers/stats-index-controller.js"></script>
 </body>
 
 </html>

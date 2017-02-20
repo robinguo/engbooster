@@ -20,5 +20,9 @@ angular.module("engbooster")
         templateUrl: "templates/pages/templates/edit.html",
         controller: "TemplatesCreateController"
       })
+      .when("/stats", {
+        templateUrl: "templates/pages/stats/index.html",
+        controller: "StatsIndexController"
+      })
       .otherwise({ redirectTo: "/" });
   });

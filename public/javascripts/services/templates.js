@@ -15,6 +15,9 @@ angular.module("engbooster")
       },
       delete: function(template) {
         return $http.delete("/api/templates/" + template._id);
+      },
+      stats: function() {
+        return $http.get("/api/stats");
       }
     }
   }]);

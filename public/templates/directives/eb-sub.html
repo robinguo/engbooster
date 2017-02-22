@@ -1,6 +1,8 @@
-<fieldset class="form-inline">
-  <input type="text" class="input-mini" ng-model="sub.src" placeholder="中文">
-  <input type="text" class="input-mini" ng-model="sub.dst" placeholder="英文">
-  <button type="button" class="btn btn-sm btn-danger" ng-click="removeSubstitution()" ng-hide="new">删除</button>
-  <button type="button" class="btn btn-sm btn-success" ng-click="addSubstitution()" ng-show="new">添加</button>
-</fieldset>
+<div class="form-group">
+  <div class="form-inline">
+    <input type="text" class="form-control" ng-model="sub.src" placeholder="中文">
+    <input type="text" class="form-control" ng-model="sub.dst" placeholder="英文">
+    <button type="button" class="form-control btn btn-sm btn-danger" ng-click="removeSubstitution()" ng-hide="new">删除</button>
+    <button type="button" class="form-control btn btn-sm btn-success" ng-click="addSubstitution()" ng-show="new">添加</button>
+  </div>
+</div>

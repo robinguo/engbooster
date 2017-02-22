@@ -16,7 +16,7 @@ var mongoose = require("mongoose"),
     difficulty: Number,
     grammarPoint: String,
     // vacabularies: [String],
-    reference: [{ textbook: String, chapter: String }],
+    reference: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reference" }],
     tags: [String],
     createdBy: String,
     updatedBy: String

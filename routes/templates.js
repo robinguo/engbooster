@@ -35,15 +35,17 @@ router.route("/:id")
     next();
   })
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
-    Template.findById(req.params.id, function(err, template) {
-      if (template) {
-        res.json(template);
-      } else {
-        var err = new Error("Template '" + req.params.id + "' not found");
-        err.status = 404;
-        next(err);
-      }
-    });
+    Template.findById(req.params.id)
+      .populate("reference")
+      .exec(function(err, template) {
+        if (template) {
+          res.json(template);
+        } else {
+          var err = new Error("Template '" + req.params.id + "' not found");
+          err.status = 404;
+          next(err);
+        }
+      });
   })
   .put(Verify.verifyOrdinaryUser, function(req, res, next) {
     var template = req.body;

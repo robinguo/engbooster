@@ -13,7 +13,7 @@
       </eb-variable>
       <div class="form-group">
         <label>难度</label>
-        <select style="display: block;" ng-model="template.level">
+        <select class="form-control" ng-model="template.level">
           <option value="A1" selected>A1</option>
           <option value="A2">A2</option>
           <option value="B1">B1</option>
@@ -28,8 +28,20 @@
       </div>
       <div class="form-group">
         <label>教材</label>
-        <eb-reference ref="ref" reference="template.reference" ng-repeat="ref in template.reference"></eb-reference>
-        <eb-reference ref="{}" reference="template.reference" new="true"></eb-reference>
+        <div class="form-group" ng-repeat="reference in template.reference">
+          <div class="form-inline">
+            <span class="form-control">{{reference.textbook}} {{reference.chapter}}</span>
+            <button type="button" class="btn btn-sm btn-danger" ng-click="removeReference(reference)">删除</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <select class="form-control" ng-options="reference.textbook for reference in references track by reference._id" ng-model="addedReference">
+              <option style="display:none" value="" selected>选择教材</option>
+            </select>
+            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加教材</button>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label>标签</label>

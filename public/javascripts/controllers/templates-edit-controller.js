@@ -1,14 +1,18 @@
 angular.module("engbooster")
-  .controller("TemplatesCreateController", ["$scope", "$state", "$stateParams", "Templates", function($scope, $state, $stateParams, Templates) {
+  .controller("TemplatesCreateController", ["$scope", "$state", "$stateParams", "Templates", "References", function($scope, $state, $stateParams, Templates, References) {
     if ($stateParams.id) {
       Templates.find($stateParams.id)
         .then(function(res) {
           if ("string" !== typeof($scope.template)) {
             $scope.template = res.data;
+            console.log($scope.template);
           } else {
             $scope.template = {};
           }
         });
+      References.all().then(function(res) {
+        $scope.references = res.data;
+      });
     } else {
       $scope.template = {};
     }
@@ -84,7 +88,17 @@ angular.module("engbooster")
     };
 
 
-    $scope.$watch("template.variables", function(newVal) {
+    // $scope.$watch("template.variables", function(newVal) {
 
-    }, true);
+    // }, true);
+    $scope.addReference = function() {
+      $scope.template.reference.push($scope.addedReference);
+    }
+
+    $scope.removeReference = function(reference) {
+      var index = $scope.template.reference.indexOf(reference);
+      if (index > -1) {
+        $scope.template.reference.splice(index, 1);
+      }
+    }
   }]);

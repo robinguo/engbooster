@@ -37,6 +37,12 @@ angular.module("engbooster")
         templateUrl: "../templates/pages/stats/index.html",
         controller: "StatsIndexController"
       })
+      .state({
+        name: "managerReferences",
+        url: "/manager/references",
+        templateUrl: "../templates/pages/references/index.html",
+        controller: "ReferencesIndexController"
+      })
   })
   .run(['$rootScope', '$state', function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(evt, to, params) {

@@ -1,5 +1,5 @@
 (function() {
-  angular.module("engbooster", ["ngRoute"])
+  angular.module("engbooster", ["ui.router"])
     .config(function($locationProvider) {
       $locationProvider.html5Mode(true);
     })

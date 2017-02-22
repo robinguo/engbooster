@@ -1,5 +1,5 @@
 angular.module("engbooster")
-  .controller("SessionController", ["$scope", "$location", "User", "Auth", function($scope, $location, User, Auth) {
+  .controller("SessionController", ["$scope", "$state", "User", "Auth", function($scope, $state, User, Auth) {
     var self = this;
 
     function handleRequest(res) {
@@ -13,7 +13,8 @@ angular.module("engbooster")
       User.login($scope.username, $scope.password)
         .then(handleRequest, handleRequest)
         .then(function() {
-          $location.path("/templates");
+          // $location.path("/templates");
+          $state.go("templatesIndex");
         });
     }
 
@@ -21,7 +22,8 @@ angular.module("engbooster")
       User.register(self.username, self.password)
         .then(handleRequest, handleRequest).
         then(function() {
-          $location.path("/login");
+          // $location.path("/login");
+          $state.go("managerLogin");
         })
     }
 

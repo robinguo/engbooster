@@ -1,7 +1,7 @@
 angular.module("engbooster")
-  .controller("TemplatesCreateController", ["$scope", "$location", "$routeParams", "Templates", function($scope, $location, $routeParams, Templates) {
-    if ($routeParams.id) {
-      Templates.find($routeParams.id)
+  .controller("TemplatesCreateController", ["$scope", "$state", "$stateParams", "Templates", function($scope, $state, $stateParams, Templates) {
+    if ($stateParams.id) {
+      Templates.find($stateParams.id)
         .then(function(res) {
           if ("string" !== typeof($scope.template)) {
             $scope.template = res.data;
@@ -73,7 +73,8 @@ angular.module("engbooster")
       console.log($scope.template);
       if ($scope.template._id !== undefined) {
         Templates.update($scope.template);
-        $location.path("/");
+        // $location.path("/");
+        $state.go("templatesIndex");
       } else {
         Templates.create($scope.template)
           .then(function() {
@@ -84,6 +85,6 @@ angular.module("engbooster")
 
 
     $scope.$watch("template.variables", function(newVal) {
-      
+
     }, true);
   }]);

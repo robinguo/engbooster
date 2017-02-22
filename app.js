@@ -63,7 +63,7 @@ app.use('/api/users', users);
 app.use("/api/templates", templates);
 app.use("/api/stats", stats);
 app.use("/*", function(req, res, next) {
-  res.sendFile("index.html", {root: path.join(__dirname, "public")});
+  res.sendFile("index.html", {root: path.join(__dirname, "public", "manager")});
 });
 
 // catch 404 and forward to error handler

@@ -18,7 +18,8 @@ angular.module("engbooster")
       responseError: function(rejection) {
         console.log("responseError");
         if (rejection.status == 401 || rejection.status == 403) {
-          $location.path("/login");
+          console.log("go to login page");
+          $location.path("/manager/login");
         }
         return $q.reject(rejection);
       }

@@ -36,7 +36,7 @@
         </div>
         <div class="form-group">
           <div class="form-inline">
-            <select class="form-control" ng-options="reference.textbook + reference.chapter for reference in references track by reference._id" ng-model="addedReference">
+            <select class="form-control" ng-options="reference.textbook + reference.chapter for reference in references | orderBy:['textbook','chapter'] track by reference._id" ng-model="addedReference">
               <option style="display:none" value="" selected>选择教材</option>
             </select>
             <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加教材</button>

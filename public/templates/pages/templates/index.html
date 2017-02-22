@@ -9,11 +9,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-4">
           <div ng-repeat="variable in template.variables">
             <p>
               {{variable.name}}:
-              <ul class="list-inline" style="display:inline">
+              <ul>
                 <li ng-repeat="sub in variable.subs">{{sub.src}}({{sub.dst}})</li>
               </ul>
             </p>
@@ -23,9 +23,14 @@
           </ul>
         </div>
         <div class="col-xs-12 col-md-3">
+          <ul>
+            <li ng-repeat="ref in template.reference">{{ref.textbook}} {{ref.chapter}}</li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-md-3">
           <p>{{template.grammarPoint}}</p>
           <p>{{template.level}} - {{template.difficulty}}</p>
-      <!--     <ul class="list-unstyled">
+          <!--     <ul class="list-unstyled">
             <li ng-repeat="ref in template.reference">{{ref.textbook}} {{ref.chapter}}</li>
           </ul> -->
         </div>

@@ -7,13 +7,15 @@ var express = require("express"),
 
 router.route("/")
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
-    Template.find({}, function(err, templates) {
-      if (err) {
-        err.status = 500;
-        next(error);
-      }
-      res.json(templates);
-    });
+    Template.find({})
+      .populate("reference")
+      .exec(function(err, templates) {
+        if (err) {
+          err.status = 500;
+          next(error);
+        }
+        res.json(templates);
+      });
   })
   .post(Verify.verifyOrdinaryUser, function(req, res, next) {
     var template = req.body;

@@ -1,4 +1,4 @@
 <div class="form-group">
-  <eb-reference ref="ref" reference="references" ng-repeat="ref in references"></eb-reference>
+  <eb-reference ref="ref" reference="references" ng-repeat="ref in references | orderBy:['textbook','chapter']"></eb-reference>
   <eb-reference ref="{}" reference="references" new="true"></eb-reference>
 </div>

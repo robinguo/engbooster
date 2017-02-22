@@ -10,12 +10,13 @@ angular.module("engbooster")
             $scope.template = {};
           }
         });
-      References.all().then(function(res) {
-        $scope.references = res.data;
-      });
     } else {
       $scope.template = {};
     }
+    References.all()
+      .then(function(res) {
+        $scope.references = res.data;
+      });
 
     $scope.tempVariables = [];
 

@@ -11,10 +11,6 @@ angular.module("engbooster")
     $scope.checkUser = function() {
       var token = Auth.getToken();
       var username = Auth.parseJwt(token)._doc.username;
-      // return username === "s.120@qq.com" || username === "admin";
-      console.log(username);
-      console.log(username === "s.120@qq.com");
-      console.log(username === "s.120@qq.com" || username === "admin");
-      return username === "s.120@qq.com";
+      return username === "s.120@qq.com" || username === "admin";
     };
   }]);

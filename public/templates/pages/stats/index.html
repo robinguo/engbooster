@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="tag in stats.tag">
+        <tr ng-repeat="tag in stats.tag | orderBy:'-count'">
           <td>{{tag._id}}</td>
           <td>{{tag.count}}</td>
         </tr>
@@ -26,8 +26,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="reference in stats.reference">
-          <td>{{reference._id}}</td>
+        <tr ng-repeat="reference in stats.reference | orderBy:'-count'">
+          <td>{{reference._id.textbook}} {{reference._id.chapter}}</td>
           <td>{{reference.count}}</td>
         </tr>
       </tbody>
@@ -43,7 +43,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="createdBy in stats.createdBy">
+        <tr ng-repeat="createdBy in stats.createdBy | orderBy:'-count'">
           <td>{{createdBy._id}}</td>
           <td>{{createdBy.count}}</td>
         </tr>

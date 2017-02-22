@@ -3,6 +3,7 @@ var express = require("express"),
   async = require("async"),
   error = require("../middlewares/error.js"),
   Template = require("../models/templates.js"),
+  Reference = require("../models/references"),
   Verify = require("./verify"),
   router = express.Router();
 
@@ -16,9 +17,12 @@ router.route("/")
           });
         },
         "reference": function(callback) {
-          Template.aggregate([{ $unwind: "$reference" }, { $group: { _id: "$reference.textbook", count: { $sum: 1 } } }], function(err, results) {
+          Template.aggregate([{ $unwind: "$reference" }, { $group: { _id: "$reference", count: { $sum: 1 } } }], function(err, results) {
             console.log(results);
-            callback(null, results);
+            Reference.populate(results, { path: "_id" }, function(err, reference) {
+              console.log(reference);
+              callback(null, reference);
+            })
           });
         },
         "createdBy": function(callback) {

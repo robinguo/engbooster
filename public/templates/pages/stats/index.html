@@ -27,7 +27,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="reference in stats.reference | orderBy:'-count'">
-          <td>{{reference._id.textbook}} {{reference._id.chapter}}</td>
+          <td>{{reference._id}}</td>
           <td>{{reference.count}}</td>
         </tr>
       </tbody>

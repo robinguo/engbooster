@@ -1,5 +1,5 @@
 angular.module("engbooster")
-  .controller("TemplatesCreateController", ["$scope", "$state", "$stateParams", "Templates", "References", function($scope, $state, $stateParams, Templates, References) {
+  .controller("TemplatesCreateController", ["$scope", "$state", "$stateParams", "Templates", "References", "Grammars", function($scope, $state, $stateParams, Templates, References, Grammars) {
     if ($stateParams.id) {
       Templates.find($stateParams.id)
         .then(function(res) {
@@ -13,10 +13,16 @@ angular.module("engbooster")
     } else {
       $scope.template = {};
     }
+
     References.all()
       .then(function(res) {
         $scope.references = res.data;
       });
+
+    Grammars.all()
+      .then(function(res) {
+        $scope.grammars = res.data;
+      })
 
     $scope.tempVariables = [];
 
@@ -98,6 +104,24 @@ angular.module("engbooster")
       var index = $scope.template.references.indexOf(reference);
       if (index > -1) {
         $scope.template.references.splice(index, 1);
+      }
+    }
+
+    $scope.addGrammarPoint = function() {
+      $scope.template.grammarPoints = $scope.template.grammarPoints || [];
+      if ($scope.grammars.map(function(x) {
+          return x.grammarPoint
+        })
+        .indexOf($scope.addedGrammarPoint) > -1) {
+        $scope.template.grammarPoints.push($scope.addedGrammarPoint);
+        $scope.addedGrammarPoint = "";
+      }
+    }
+
+    $scope.removeGrammarPoint = function(grammar) {
+      var index = $scope.template.grammarPoints.indexOf(grammar);
+      if (index > -1) {
+        $scope.template.grammarPoints.splice(index, 1);
       }
     }
   }]);

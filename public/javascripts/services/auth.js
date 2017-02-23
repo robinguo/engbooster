@@ -3,7 +3,6 @@ angular.module("engbooster")
     var self = this;
 
     self.parseJwt = function(token) {
-      console.log(token);
       var base64Url = token.split('.')[1];
       var base64 = base64Url.replace('-', '+')
         .replace('_', '/');

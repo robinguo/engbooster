@@ -32,6 +32,7 @@ var templates = require("./routes/templates.js");
 var users = require("./routes/users.js");
 var stats = require("./routes/stats.js");
 var references = require("./routes/references.js");
+var grammars = require("./routes/grammars.js");
 var error =require("./middlewares/error.js")
 
 var app = express();
@@ -64,6 +65,7 @@ app.use('/api/users', users);
 app.use("/api/templates", templates);
 app.use("/api/stats", stats);
 app.use("/api/references", references);
+app.use("/api/grammars", grammars);
 app.use("/*", function(req, res, next) {
   res.sendFile("index.html", {root: path.join(__dirname, "public", "manager")});
 });

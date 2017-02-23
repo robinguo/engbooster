@@ -1,5 +1,5 @@
 angular.module("engbooster")
-  .factory("References", ["$http", function TemplatesFactory($http) {
+  .factory("References", ["$http", function ReferencesFactory($http) {
     return {
       all: function() {
         return $http.get("/api/references");

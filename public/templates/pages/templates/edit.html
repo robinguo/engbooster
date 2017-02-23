@@ -24,7 +24,22 @@
       </div>
       <div class="form-group">
         <label for="grammar-point">语法点</label>
-        <input type="text" id="grammar-point" class="form-control" ng-model="template.grammarPoint">
+        <!-- <input type="text" id="grammar-point" class="form-control" ng-model="template.grammarPoint"> -->
+        <div class="form-group" ng-repeat="grammar in template.grammarPoints track by $index">
+          <div class="form-inline">
+            <span class="form-control">{{grammar}}</span>
+            <button type="button" class="btn btn-sm btn-danger form-control" ng-click="removeGrammarPoint(grammar)">删除</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <input type="text" value="" list="grammarpoints" class="form-control" ng-model="addedGrammarPoint" />
+            <datalist id="grammarpoints">
+              <option value="{{grammar.grammarPoint}}" ng-repeat="grammar in grammars"></option>
+            </datalist>
+            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addGrammarPoint()">添加语法点</button>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label>教材</label>
@@ -48,7 +63,7 @@
         <eb-tag tag="tag" tags="template.tags" ng-repeat="tag in template.tags track by $index"></eb-tag>
         <eb-tag tag="" tags="template.tags" new="true"></eb-tag>
       </div>
-      <button type="Submit" class="btn btn-success">提交</button>
+      <button type="Submit" class="btn btn-success form-control">提交</button>
     </form>
   </div>
 </div>

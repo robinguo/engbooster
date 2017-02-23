@@ -6,24 +6,28 @@ angular.module("engbooster")
       templateUrl: "templates/directives/eb-reference.html",
       scope: {
         ref: "=",
-        reference: "=",
+        references: "=",
         new: "@"
       },
       controller: function($scope) {
         $scope.addReference = function() {
-          $scope.reference = $scope.reference || [];
-          $scope.reference.push($scope.ref);
-          References.create($scope.ref);
-          $scope.ref = {};
+          References.create($scope.ref)
+            .then(function(res) {
+              $scope.references = $scope.references || [];
+              $scope.references.push(res.data[0]);
+              $scope.ref = {};
+            });
         };
 
-        $scope.removeReference = function() {
-          References.delete($scope.ref);
-          $scope.reference = $scope.reference || [];
-          var index = $scope.reference.indexOf($scope.ref);
-          if (index > -1) {
-            $scope.reference.splice(index, 1);
-          }
+        $scope.removeReference = function(ref) {
+          References.delete(ref)
+            .then(function(res) {
+              $scope.references = $scope.references || [];
+              var index = $scope.references.indexOf(ref);
+              if (index > -1) {
+                $scope.references.splice(index, 1);
+              }
+            });
         };
 
         $scope.updateReference = function() {

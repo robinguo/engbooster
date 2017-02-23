@@ -31,18 +31,37 @@
         <div class="form-group" ng-repeat="reference in template.reference">
           <div class="form-inline">
             <span class="form-control">{{reference.textbook}} {{reference.chapter}}</span>
-            <button type="button" class="btn btn-sm btn-danger" ng-click="removeReference(reference)">删除</button>
+            <button type="button" class="btn btn-sm btn-danger" ng-click="removeReferenceOld(reference)">删除</button>
           </div>
         </div>
         <div class="form-group">
           <div class="form-inline">
-            <select class="form-control" ng-options="reference.textbook + reference.chapter for reference in references | orderBy:['textbook','chapter'] track by reference._id" ng-model="addedReference">
+            <select class="form-control" ng-options="reference.textbook + reference.chapter for reference in references track by reference._id" ng-model="addedReference">
               <option style="display:none" value="" selected>选择教材</option>
             </select>
-            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加教材</button>
+            <input type="text" name="chapter" class="form-control" placeholder="输入单元，格式类似'Unit 1-3'、'Unit 19'、'Lesson 10'">
+            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReferenceOld()">添加教材</button>
           </div>
         </div>
       </div>
+        <div class="form-group">
+          <label>教材（新）</label>
+          <div class="form-group" ng-repeat="reference in template.references">
+            <div class="form-inline">
+              <span class="form-control">{{reference.textbook}} {{reference.chapter}}</span>
+              <button type="button" class="btn btn-sm btn-danger form-control" ng-click="removeReference(reference)">删除</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-inline">
+              <select class="form-control" ng-options="reference.textbook for reference in references" ng-model="addedTextbook">
+                <option style="display:none" value="" selected>选择教材</option>
+              </select>
+              <input type="text" name="chapter" class="form-control" placeholder="输入单元，格式类似'Unit 1-3'、'Unit 19'、'Lesson 10'" ng-model="addedChapter">
+              <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加教材</button>
+            </div>
+          </div>
+        </div>
       <div class="form-group">
         <label>标签</label>
         <eb-tag tag="tag" tags="template.tags" ng-repeat="tag in template.tags track by $index"></eb-tag>

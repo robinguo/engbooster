@@ -2,18 +2,21 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   error = require("../middlewares/error.js"),
   Reference = require("../models/references.js"),
+  Template = require("../models/templates.js"),
   Verify = require("./verify"),
   router = express.Router();
 
 router.route("/")
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
-    Reference.find({}, function(err, reference) {
-      if (err) {
-        err.status = 500;
-        next(error);
-      }
-      res.json(reference);
-    });
+    Reference.find({})
+      .sort({ textbook: "asc" })
+      .exec(function(err, reference) {
+        if (err) {
+          err.status = 500;
+          next(error);
+        }
+        res.json(reference);
+      });
   })
   .post(Verify.verifyOrdinaryUser, function(req, res, next) {
     var reference = req.body;
@@ -51,10 +54,14 @@ router.route("/:id")
     Reference.findByIdAndUpdate(req.params.id, {
       $set: reference
     }, {
-      new: true
-    }, function(err, reference) {
-      if (reference) {
-        res.json(reference);
+      new: false
+    }, function(err, oldReference) {
+      if (oldReference) {
+        Template.updateMany({ "references.textbook": oldReference.textbook }, { "references.$.textbook": reference.textbook },
+          function(err, templates) {
+            res.json({ reference, templates });
+          }
+        );
       } else {
         var err = new Error("Reference '" + req.params.id + "' not updated");
         err.status = 404;
@@ -63,9 +70,13 @@ router.route("/:id")
     });
   })
   .delete(Verify.verifyOrdinaryUser, function(req, res, next) {
-    Reference.findByIdAndRemove(req.params.id, function(err, reference) {
-      if (reference) {
-        res.json(reference);
+    Reference.findByIdAndRemove(req.params.id, function(err, oldReference) {
+      if (oldReference) {
+        Template.updateMany({ "references.textbook": oldReference.textbook }, { "$pull": { references: { textbook: oldReference.textbook } } },
+          function(err, templates) {
+            res.json({ oldReference, templates });
+          }
+        );
       } else {
         var err = new Error("Reference '" + req.params.id + "' not deleted");
         err.status = 404;

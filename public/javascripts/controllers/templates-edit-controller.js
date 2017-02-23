@@ -92,14 +92,26 @@ angular.module("engbooster")
     // $scope.$watch("template.variables", function(newVal) {
 
     // }, true);
-    $scope.addReference = function() {
+    $scope.addReferenceOld = function() {
       $scope.template.reference.push($scope.addedReference);
     }
 
-    $scope.removeReference = function(reference) {
+    $scope.removeReferenceOld = function(reference) {
       var index = $scope.template.reference.indexOf(reference);
       if (index > -1) {
         $scope.template.reference.splice(index, 1);
+      }
+    }
+
+    $scope.addReference = function() {
+      $scope.template.references = $scope.template.references || [];
+      $scope.template.references.push({textbook: $scope.addedTextbook.textbook, chapter: $scope.addedChapter});
+    }
+
+    $scope.removeReference = function(reference) {
+      var index = $scope.template.references.indexOf(reference);
+      if (index > -1) {
+        $scope.template.references.splice(index, 1);
       }
     }
   }]);

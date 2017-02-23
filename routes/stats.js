@@ -17,7 +17,7 @@ router.route("/")
           });
         },
         "reference": function(callback) {
-          Template.aggregate([{ $unwind: "$references" }, { $group: { _id: "$references", count: { $sum: 1 } } }], function(err, results) {
+          Template.aggregate([{ $unwind: "$references" }, { $group: { _id: "$references.textbook", count: { $sum: 1 } } }], function(err, results) {
             console.log(results);
             callback(null, results);
           });

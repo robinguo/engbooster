@@ -8,7 +8,6 @@ var express = require("express"),
 router.route("/")
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     Template.find({})
-      .populate("reference")
       .exec(function(err, templates) {
         if (err) {
           err.status = 500;
@@ -38,7 +37,6 @@ router.route("/:id")
   })
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     Template.findById(req.params.id)
-      .populate("reference")
       .exec(function(err, template) {
         if (template) {
           res.json(template);

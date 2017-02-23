@@ -1,6 +1,7 @@
 <div class="form-group">
   <div class="form-inline">
     <input type="text" class="form-control" ng-model="ref.textbook" placeholder="教材">
+    <input type="text" class="form-control" ng-model="ref.chapter" placeholder="单元">
     <button type="button" class="btn btn-sm btn-primary" ng-click="updateReference()" ng-hide="new">更新</button>
     <button type="button" class="btn btn-sm btn-danger" ng-click="removeReference(ref)" ng-hide="new">删除</button>
     <button type="button" class="btn btn-sm btn-success" ng-click="addReference()" ng-show="new">添加</button>

@@ -9,7 +9,7 @@ var express = require("express"),
 router.route("/")
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     Reference.find({})
-      .sort({ textbook: "asc" })
+      .sort({ textbook: "asc", chapter: "asc" })
       .exec(function(err, reference) {
         if (err) {
           err.status = 500;
@@ -57,7 +57,7 @@ router.route("/:id")
       new: false
     }, function(err, oldReference) {
       if (oldReference) {
-        Template.updateMany({ "references.textbook": oldReference.textbook }, { "references.$.textbook": reference.textbook },
+        Template.updateMany({ "references.textbook": oldReference.textbook, "references.chapter": oldReference.chapter }, { $set: { "references.$.textbook": reference.textbook, "references.$.chapter": reference.chapter } },
           function(err, templates) {
             res.json({ reference, templates });
           }
@@ -72,7 +72,7 @@ router.route("/:id")
   .delete(Verify.verifyOrdinaryUser, function(req, res, next) {
     Reference.findByIdAndRemove(req.params.id, function(err, oldReference) {
       if (oldReference) {
-        Template.updateMany({ "references.textbook": oldReference.textbook }, { "$pull": { references: { textbook: oldReference.textbook } } },
+        Template.updateMany({ "references.textbook": oldReference.textbook, "references.chapter": oldReference.chapter }, { "$pull": { references: oldReference } },
           function(err, templates) {
             res.json({ oldReference, templates });
           }

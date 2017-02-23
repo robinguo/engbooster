@@ -88,24 +88,10 @@ angular.module("engbooster")
       }
     };
 
-
-    // $scope.$watch("template.variables", function(newVal) {
-
-    // }, true);
-    $scope.addReferenceOld = function() {
-      $scope.template.reference.push($scope.addedReference);
-    }
-
-    $scope.removeReferenceOld = function(reference) {
-      var index = $scope.template.reference.indexOf(reference);
-      if (index > -1) {
-        $scope.template.reference.splice(index, 1);
-      }
-    }
-
     $scope.addReference = function() {
       $scope.template.references = $scope.template.references || [];
-      $scope.template.references.push({textbook: $scope.addedTextbook.textbook, chapter: $scope.addedChapter});
+      $scope.template.references.push($scope.addedReference);
+      $scope.addedReference = {};
     }
 
     $scope.removeReference = function(reference) {

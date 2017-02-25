@@ -14,7 +14,7 @@ router.route("/")
         res.json(subjects);
       });
     } else {
-      Subject.find({path: {$regex: "^\\w+(#\\w+){1," + level + "}$"}}, function(err, subjects) {
+      Subject.find({ path: { $regex: "^\\w+(#\\w+){1," + level + "}$" } }, function(err, subjects) {
         res.json(subjects);
       })
     }
@@ -53,24 +53,46 @@ router.route("/:id")
   .put(Verify.verifyOrdinaryUser, function(req, res, next) {
     var subject = req.body;
     subject.updatedBy = req.decoded._doc.username;
+
     var sub = new Subject(subject);
     sub.isNew = false;
-    sub.save(function(err, subject) {
-      if (subject) {
-        res.json(subject);
-      } else {
-        console.log(err);
-        var err = new Error("Subject '" + req.params.id + "' not updated");
-        err.status = 404;
-        next(err);
+    sub.getAncestors(function(err, subjects) {
+      var newSubject = [];
+      for (var i = 1; i < subjects.length; i++) {
+        newSubject.push(subjects[i].title);
       }
+      newSubject.push(sub.title);
+      Subject.findById(sub._id, function(err, oldSubject) {
+        var oldTitle = oldSubject.title;
+        Template.updateMany({ subjects: { $elemMatch: { $elemMatch: { $in: [oldTitle] } } } }, { $push: { "subjects": newSubject } }, function(err, results) {
+          Template.updateMany({ subjects: { $elemMatch: { $elemMatch: { $in: [oldTitle] } } } }, { $unset: { "subjects.$": 1 } }, function(err, results) {
+            Template.updateMany({}, { $pull: { "subjects": null } }, function(err, results) {
+              sub.save(function(err, subject) {
+                if (subject) {
+                  res.json(subject);
+                } else {
+                  console.log(err);
+                  var err = new Error("Subject '" + req.params.id + "' not updated");
+                  err.status = 404;
+                  next(err);
+                }
+              });
+            });
+          });
+        });
+      });
     });
   })
   .delete(Verify.verifyOrdinaryUser, function(req, res, next) {
     Subject.findById(req.params.id, function(err, subject) {
       subject.remove(function(err, subject) {
         if (subject) {
-          res.json(subject);
+          var title = subject.title;
+          Template.updateMany({ subjects: { $elemMatch: { $elemMatch: { $in: [title] } } } }, { $unset: { "subjects.$": 1 } }, function(err, results) {
+            Template.updateMany({}, { $pull: { "subjects": null } }, function(err, results) {
+              res.json(subject);
+            });
+          });
         } else {
           var err = new Error("Subject '" + req.params.id + "' not deleted");
           err.status = 404;

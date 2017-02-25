@@ -1,0 +1,33 @@
+<!-- Nested node template -->
+<script type="text/ng-template" id="nodes_renderer.html">
+  <div class="tree-node">
+    <div class="pull-left tree-handle" ui-tree-handle>
+      <span class="glyphicon glyphicon-move"></span>
+    </div>
+    <div class="tree-node-content">
+      <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
+        <span class="glyphicon" ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+          }">
+        </span>
+      </a>
+      <input type="text" ng-model="subject.title" ng-blur="editSubject(this)">
+      <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeSubject(this)"><span class="glyphicon glyphicon-remove"></span></a>
+      <a class="pull-right btn btn-success btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+  </div>
+  <ol ui-tree-nodes="" ng-model="subject.children" ng-class="{hidden: collapsed}">
+    <li ng-repeat="subject in subject.children" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+  </ol>
+</script>
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <div ui-tree="treeOptions" id="tree" data-clone-enabled="true">
+      <ol ui-tree-nodes ng-model="subjects">
+        <li ng-repeat="subject in subjects" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+      </ol>
+    </div>
+  </div>
+</div>

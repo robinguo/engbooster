@@ -37,7 +37,7 @@
             <datalist id="grammarpoints">
               <option value="{{grammar.grammarPoint}}" ng-repeat="grammar in grammars"></option>
             </datalist>
-            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addGrammarPoint()">添加语法点</button>
+            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addGrammarPoint()">添加</button>
           </div>
         </div>
       </div>
@@ -54,16 +54,33 @@
             <select class="form-control" ng-options="reference.textbook + ' ' + reference.chapter for reference in references" ng-model="addedReference">
               <option style="display:none" value="" selected>选择教材</option>
             </select>
-            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加教材</button>
+            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加</button>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label>标签</label>
-        <eb-tag tag="tag" tags="template.tags" ng-repeat="tag in template.tags track by $index"></eb-tag>
-        <eb-tag tag="" tags="template.tags" new="true"></eb-tag>
+        <label>主题</label>
+        <div class="form-group" ng-repeat="subject in template.subjects">
+          <div class="form-inline">
+            <span class="form-control">{{subject[0]}} {{subject[1]}}</span>
+            <button type="button" class="btn btn-sm btn-danger form-control" ng-click="removeSubject(this)">删除</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <select class="form-control" ng-options="subject.title for subject in subjects | filter:isFirstLevel" ng-model="firstLevel">
+              <option style="display:none" value="" selected>选择一级主题</option>
+            </select>
+            <select class="form-control" ng-options="subject.title for subject in subjects | filter:isSecondLevel" ng-model="secondLevel">
+              <option style="display:none" value="" selected>选择二级主题</option>
+            </select>
+            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addSubject(this)">添加</button>
+          </div>
+        </div>
       </div>
-      <button type="Submit" class="btn btn-success form-control">提交</button>
+      <div class="form-group">
+        <button type="Submit" class="btn btn-success form-control">提交</button>
+      </div>
     </form>
   </div>
 </div>

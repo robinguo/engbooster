@@ -19,6 +19,7 @@ var mongoose = require("mongoose"),
     // vacabularies: [String],
     references: [ {textbook: String, chapter: String} ],
     tags: [String],
+    subjects: [Schema.Types.Mixed],
     createdBy: String,
     updatedBy: String
   }, {

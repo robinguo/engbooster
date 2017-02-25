@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongoose = require("mongoose");
+mongoose.Promise = require('bluebird');
+mongoose.set('debug', true);
 var url = "mongodb://localhost:27017/engbooster"; // TODO: MOVE constants to global config file
 mongoose.connect(url, {user: "eb", pass: "bobobo"}); // TODO: MOVE constants to global config file
 var db = mongoose.connection;
@@ -33,6 +35,7 @@ var users = require("./routes/users.js");
 var stats = require("./routes/stats.js");
 var references = require("./routes/references.js");
 var grammars = require("./routes/grammars.js");
+var subjects = require("./routes/subjects.js");
 var error =require("./middlewares/error.js")
 
 var app = express();
@@ -66,6 +69,7 @@ app.use("/api/templates", templates);
 app.use("/api/stats", stats);
 app.use("/api/references", references);
 app.use("/api/grammars", grammars);
+app.use("/api/subjects", subjects);
 app.use("/*", function(req, res, next) {
   res.sendFile("index.html", {root: path.join(__dirname, "public", "manager")});
 });

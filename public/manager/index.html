@@ -8,6 +8,8 @@
   <base href="/" />
   <title>EngBooster</title>
   <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
+  <link rel="stylesheet" href="../stylesheets/treeview.css">
 </head>
 
 <body>
@@ -26,7 +28,7 @@
         <ul class="nav navbar-nav">
           <li><a ui-sref="templatesIndex">例句<span class="sr-only">(current)</a></li>
           <li><a ui-sref="managerStats">统计</a></li>
-          <li><a ui-sref="managerSubject">主题管理</a></li>
+          <li><a ui-sref="managerSubjects">主题管理</a></li>
           <li><a ui-sref="managerReferences">教材管理</a></li>
           <li><a ui-sref="managerGrammarPoints">语法点管理</a></li>
         </ul>
@@ -40,6 +42,7 @@
   <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="../bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
   <script src="../javascripts/app.js"></script>
   <script src="../javascripts/route.js"></script>
   <script src="../javascripts/directives/eb-variable.js"></script>
@@ -53,12 +56,14 @@
   <script src="../javascripts/services/templates.js"></script>
   <script src="../javascripts/services/references.js"></script>
   <script src="../javascripts/services/grammars.js"></script>
+  <script src="../javascripts/services/subjects.js"></script>
   <script src="../javascripts/controllers/session-controller.js"></script>
   <script src="../javascripts/controllers/templates-index-controller.js"></script>
   <script src="../javascripts/controllers/templates-edit-controller.js"></script>
   <script src="../javascripts/controllers/stats-index-controller.js"></script>
   <script src="../javascripts/controllers/references-index-controller.js"></script>
   <script src="../javascripts/controllers/grammars-index-controller.js"></script>
+  <script src="../javascripts/controllers/subjects-index-controller.js"></script>
 </body>
 
 </html>

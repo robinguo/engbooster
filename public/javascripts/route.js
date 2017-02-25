@@ -49,6 +49,12 @@ angular.module("engbooster")
         templateUrl: "../templates/pages/grammars/index.html",
         controller: "GrammarsIndexController"
       })
+      .state({
+        name: "managerSubjects",
+        url: "/manager/subjects",
+        templateUrl: "../templates/pages/subjects/index.html",
+        controller: "SubjectsIndexController"
+      })
   })
   .run(['$rootScope', '$state', function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(evt, to, params) {

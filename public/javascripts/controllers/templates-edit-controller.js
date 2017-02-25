@@ -1,5 +1,5 @@
 angular.module("engbooster")
-  .controller("TemplatesCreateController", ["$scope", "$state", "$stateParams", "Templates", "References", "Grammars", function($scope, $state, $stateParams, Templates, References, Grammars) {
+  .controller("TemplatesCreateController", ["$scope", "$state", "$stateParams", "Templates", "References", "Grammars", "Subjects", function($scope, $state, $stateParams, Templates, References, Grammars, Subjects) {
     if ($stateParams.id) {
       Templates.find($stateParams.id)
         .then(function(res) {
@@ -23,6 +23,11 @@ angular.module("engbooster")
       .then(function(res) {
         $scope.grammars = res.data;
       })
+
+    Subjects.all(2)
+      .then(function(res) {
+        $scope.subjects = res.data;
+      });
 
     $scope.tempVariables = [];
 
@@ -83,9 +88,10 @@ angular.module("engbooster")
     $scope.saveTemplate = function() {
       console.log($scope.template);
       if ($scope.template._id !== undefined) {
-        Templates.update($scope.template);
-        // $location.path("/");
-        $state.go("templatesIndex");
+        Templates.update($scope.template)
+          .then(function(res) {
+            $state.go("templatesIndex");
+          });
       } else {
         Templates.create($scope.template)
           .then(function() {
@@ -98,14 +104,14 @@ angular.module("engbooster")
       $scope.template.references = $scope.template.references || [];
       $scope.template.references.push($scope.addedReference);
       $scope.addedReference = {};
-    }
+    };
 
     $scope.removeReference = function(reference) {
       var index = $scope.template.references.indexOf(reference);
       if (index > -1) {
         $scope.template.references.splice(index, 1);
       }
-    }
+    };
 
     $scope.addGrammarPoint = function() {
       $scope.template.grammarPoints = $scope.template.grammarPoints || [];
@@ -116,12 +122,44 @@ angular.module("engbooster")
         $scope.template.grammarPoints.push($scope.addedGrammarPoint);
         $scope.addedGrammarPoint = "";
       }
-    }
+    };
 
     $scope.removeGrammarPoint = function(grammar) {
       var index = $scope.template.grammarPoints.indexOf(grammar);
       if (index > -1) {
         $scope.template.grammarPoints.splice(index, 1);
       }
-    }
+    };
+
+    $scope.removeSubject = function(scope) {
+      var index = $scope.template.subjects.indexOf(scope.subject);
+      if (index > -1) {
+        $scope.template.subjects.splice(index, 1);
+      }
+    };
+
+    $scope.addSubject = function(scope) {
+      console.log($scope.firstLevel);
+      console.log($scope.secondLevel);
+      if ($scope.firstLevel && $scope.secondLevel) {
+        $scope.template.subjects.push([$scope.firstLevel.title, $scope.secondLevel.title]);
+        $scope.firstLevel = "";
+        $scope.secondLevel = "";
+      }
+    };
+
+    $scope.isFirstLevel = function(value, index, array) {
+      if (value.path.split('#')
+        .length == 2) {
+        return true;
+      }
+      return false;
+    };
+
+    $scope.isSecondLevel = function(value, index, array) {
+      if ($scope.firstLevel && (value.path.indexOf($scope.firstLevel._id + "#") > -1)) {
+        return true;
+      }
+      return false;
+    };
   }]);

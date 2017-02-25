@@ -54,4 +54,11 @@ angular.module("engbooster")
       return username === "s.120@qq.com" || username === "admin";
       // return true;
     };
+
+    $scope.isRootSubject = function(scope) {
+      if (scope.$modelValue.title == "所有主题") {
+        return true;
+      }
+      return false;
+    };
   }]);

@@ -13,7 +13,7 @@
         </span>
       </a>
       <input type="text" ng-model="subject.title" ng-blur="editSubject(this)">
-      <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeSubject(this)"><span class="glyphicon glyphicon-remove"></span></a>
+      <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-hide="isRootSubject(this)" ng-click="removeSubject(this)"><span class="glyphicon glyphicon-remove"></span></a>
       <a class="pull-right btn btn-success btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
     </div>
   </div>

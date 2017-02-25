@@ -10,14 +10,14 @@ var express = require("express"),
 router.route("/")
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     async.parallel({
-        "tag": function(callback) {
-          Template.aggregate([{ $unwind: "$tags" }, { $group: { _id: "$tags", count: { $sum: 1 } } }], function(err, results) {
+        "subject": function(callback) {
+          Template.aggregate([{ $unwind: "$subjects" }, { $group: { _id: "$subjects", count: { $sum: 1 } } }, { $sort: { _id: 1 } }], function(err, results) {
             console.log(results);
             callback(null, results);
           });
         },
         "reference": function(callback) {
-          Template.aggregate([{ $unwind: "$references" }, { $group: { _id: "$references.textbook", count: { $sum: 1 } } }], function(err, results) {
+          Template.aggregate([{ $unwind: "$references" }, { $group: { _id: {textbook: "$references.textbook", chapter: "$references.chapter"}, count: { $sum: 1 } } }, { $sort: { "_id.textbook": 1, "_id.chapter": 1 } }], function(err, results) {
             console.log(results);
             callback(null, results);
           });

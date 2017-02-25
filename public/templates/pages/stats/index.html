@@ -1,17 +1,19 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 table-responsive">
     <table class="table">
-      <caption>按标签统计</caption>
+      <caption>按主题统计</caption>
       <thead>
         <tr>
-          <th>标签</th>
+          <th>一级主题</th>
+          <th>二级主题</th>
           <th>例句数量</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="tag in stats.tag | orderBy:'-count'">
-          <td>{{tag._id}}</td>
-          <td>{{tag.count}}</td>
+        <tr ng-repeat="subject in stats.subject">
+          <td>{{subject._id[0]}}</td>
+          <td>{{subject._id[1]}}</td>
+          <td>{{subject.count}}</td>
         </tr>
       </tbody>
     </table>
@@ -22,12 +24,14 @@
       <thead>
         <tr>
           <th>教材</th>
+          <th>单元</th>
           <th>例句数量</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="reference in stats.reference | orderBy:'-count'">
-          <td>{{reference._id}}</td>
+        <tr ng-repeat="reference in stats.reference">
+          <td>{{reference._id.textbook}}</td>
+          <td>{{reference._id.chapter}}</td>
           <td>{{reference.count}}</td>
         </tr>
       </tbody>

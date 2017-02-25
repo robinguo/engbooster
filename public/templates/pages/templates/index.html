@@ -18,21 +18,29 @@
               </ul>
             </p>
           </div>
-          <ul class="list-inline" style="display:inline">
+          <!-- <ul class="list-inline" style="display:inline">
             <li ng-repeat="tag in template.tags"><span class="label label-default">{{tag}}</span></li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-md-3">
-          <ul>
-            <li ng-repeat="ref in template.references">{{ref.textbook}} {{ref.chapter}}</li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-md-3">
-          <p>{{template.grammarPoint}}</p>
-          <p>{{template.level}} - {{template.difficulty}}</p>
-          <!--     <ul class="list-unstyled">
-            <li ng-repeat="ref in template.reference">{{ref.textbook}} {{ref.chapter}}</li>
           </ul> -->
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <p>主题:
+            <ul>
+              <li ng-repeat="subject in template.subjects">{{subject[0]}} {{subject[1]}}</li>
+            </ul>
+          </p>
+          <p>教材:
+            <ul>
+              <li ng-repeat="ref in template.references">{{ref.textbook}} {{ref.chapter}}</li>
+            </ul>
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <p>语法点:
+            <ul>
+              <li ng-repeat="grammar in template.grammarPoints">{{grammar}}</li>
+            </ul>
+          </p>
+          <p>{{template.level}}</p>
         </div>
         <div class="col-xs-12 col-md-2">
           <a class="btn btn-primary" role="button" ui-sref="editTemplate({id: template._id})">修改</a>

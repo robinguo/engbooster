@@ -1,5 +1,5 @@
 angular.module("engbooster")
-  .directive("ebReference", ["References", "Grammars", function(References, Grammars) {
+  .directive("ebReference", ["References", function(References, Grammars) {
     return {
       replace: true,
       restrict: "E",
@@ -7,13 +7,14 @@ angular.module("engbooster")
       scope: {
         ref: "=",
         references: "=",
+        grammars: "=",
         new: "@"
       },
       controller: function($scope) {
-        Grammars.all()
-          .then(function(res) {
-            $scope.grammars = res.data;
-          });
+        // Grammars.all()
+        //   .then(function(res) {
+        //     $scope.grammars = res.data;
+        //   });
 
         $scope.addReference = function() {
           References.create($scope.ref)

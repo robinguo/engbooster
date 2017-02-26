@@ -1,6 +1,9 @@
+<div class="form-inline">
 <a role="button" class="btn btn-success navbar-btn" ui-sref="newTemplate">新增</a>
+<input class="form-control" ng-model="searchText" placeholder="过滤例句（全文搜索）">
+</div>
 <ul class="list-group">
-  <li class="list-group-item" ng-repeat="template in templates">
+  <li class="list-group-item" ng-repeat="template in templates | filter:searchText">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">

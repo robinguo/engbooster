@@ -147,8 +147,7 @@ angular.module("engbooster")
     };
 
     $scope.addSubject = function(scope) {
-      console.log($scope.firstLevel);
-      console.log($scope.secondLevel);
+      $scope.template.subjects = $scope.template.subjects || [];
       if ($scope.firstLevel && $scope.secondLevel) {
         $scope.template.subjects.push([$scope.firstLevel.title, $scope.secondLevel.title]);
         $scope.firstLevel = "";

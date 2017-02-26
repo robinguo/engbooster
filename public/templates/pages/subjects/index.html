@@ -22,7 +22,7 @@
     </li>
   </ol>
 </script>
-<div class="row">
+<div class="row" ng-show="checkUser()">
   <div class="col-xs-12 col-sm-6">
     <div ui-tree="treeOptions" id="tree" data-clone-enabled="true">
       <ol ui-tree-nodes ng-model="subjects">

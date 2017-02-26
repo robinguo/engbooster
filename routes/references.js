@@ -25,7 +25,9 @@ router.route("/")
     reference.updatedBy = req.decoded._doc.username;
     Reference.insertMany([reference], function(error, reference) {
       if (reference.length) {
-        res.json(reference);
+        Reference.populate(reference, "grammar", function(err) {
+          res.json(reference);
+        })
       } else {
         var err = new Error("Reference '" + JSON.stringify(req.body) + "' not inserted");
         err.status = 404;

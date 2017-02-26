@@ -1,11 +1,12 @@
-var mongoose = require("mongoose"),
-  Schema = mongoose.Schema,
-  referenceSchema = new Schema({
-    textbook: String,
-    chapter: String
-  }, {
-    timestamps: true
-  }),
-  Reference = mongoose.model("Reference", referenceSchema);
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+var referenceSchema = new Schema({
+  textbook: String,
+  chapter: String,
+  grammar: { type: Schema.Types.ObjectId, ref: "Grammar" }
+}, {
+  timestamps: true
+});
+var Reference = mongoose.model("Reference", referenceSchema);
 
 module.exports = Reference;

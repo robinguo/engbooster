@@ -23,6 +23,23 @@
         </select>
       </div>
       <div class="form-group">
+        <label>教材</label>
+        <div class="form-group" ng-repeat="reference in template.references">
+          <div class="form-inline">
+            <span class="form-control">{{reference.textbook}} {{reference.chapter}}</span>
+            <button type="button" class="btn btn-sm btn-danger form-control" ng-click="removeReference(reference)">删除</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <select class="form-control" ng-options="reference.textbook + ' ' + reference.chapter for reference in references" ng-model="addedReference">
+              <option style="display:none" value="" selected>选择教材</option>
+            </select>
+            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="grammar-point">语法点</label>
         <!-- <input type="text" id="grammar-point" class="form-control" ng-model="template.grammarPoint"> -->
         <div class="form-group" ng-repeat="grammar in template.grammarPoints track by $index">
@@ -38,23 +55,6 @@
               <option value="{{grammar.grammarPoint}}" ng-repeat="grammar in grammars"></option>
             </datalist>
             <button type="button" class="btn btn-sm btn-success form-control" ng-click="addGrammarPoint()">添加</button>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>教材</label>
-        <div class="form-group" ng-repeat="reference in template.references">
-          <div class="form-inline">
-            <span class="form-control">{{reference.textbook}} {{reference.chapter}}</span>
-            <button type="button" class="btn btn-sm btn-danger form-control" ng-click="removeReference(reference)">删除</button>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-inline">
-            <select class="form-control" ng-options="reference.textbook + ' ' + reference.chapter for reference in references" ng-model="addedReference">
-              <option style="display:none" value="" selected>选择教材</option>
-            </select>
-            <button type="button" class="btn btn-sm btn-success form-control" ng-click="addReference()">添加</button>
           </div>
         </div>
       </div>

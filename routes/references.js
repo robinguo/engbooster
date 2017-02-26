@@ -9,6 +9,7 @@ var express = require("express"),
 router.route("/")
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     Reference.find({})
+      .populate("grammar")
       .sort({ textbook: "asc", chapter: "asc" })
       .exec(function(err, reference) {
         if (err) {

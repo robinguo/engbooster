@@ -102,7 +102,15 @@ angular.module("engbooster")
 
     $scope.addReference = function() {
       $scope.template.references = $scope.template.references || [];
-      $scope.template.references.push($scope.addedReference);
+
+      if ($scope.template.references.indexOf($scope.addedReference) < 0) {
+        $scope.template.references.push($scope.addedReference);
+      }
+
+      if ($scope.addedReference.grammar && $scope.template.grammarPoints.indexOf($scope.addedReference.grammar.grammarPoint) < 0) {
+        $scope.template.grammarPoints.push($scope.addedReference.grammar.grammarPoint);
+      }
+
       $scope.addedReference = {};
     };
 

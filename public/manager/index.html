@@ -13,10 +13,10 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
-      <div class="navbar-heaer">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -24,9 +24,9 @@
         </button>
         <a ui-sref="templatesIndex" class="navbar-brand">EngBooster</a>
       </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a ui-sref="templatesIndex">例句<span class="sr-only">(current)</a></li>
+          <li><a ui-sref="templatesIndex">例句<span class="sr-only">(current)</span></a></li>
           <li><a ui-sref="managerStats">统计</a></li>
           <li><a ui-sref="managerSubjects">主题管理</a></li>
           <li><a ui-sref="managerReferences">教材管理</a></li>

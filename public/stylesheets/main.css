@@ -1,0 +1,17 @@
+.templates-top,
+.templates {
+  border-bottom: 1px solid #ddd;
+}
+
+.row-buffer {
+  margin: 0; 
+  padding: 8px 0;
+}
+
+.form-inline .template-search-input {
+  width: 100%;
+}
+
+.list-unstyled .label {
+  margin-right: 4px;
+}
